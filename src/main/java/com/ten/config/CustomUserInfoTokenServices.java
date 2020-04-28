@@ -100,16 +100,16 @@ public class CustomUserInfoTokenServices implements ResourceServerTokenServices 
         if (map.containsKey("sub")) {
             String googleEmail = (String) map.get("email");
             User user = userService.getUserByLogin(googleEmail);
-            Role role = roleService.getRoleByName("ROLE_USER");
-            if (user == null) {
-                user = new User();
-                user.setRoles(Collections.singleton(role));
-                user.setLogin(googleEmail);
-                user.setPassword(passwordEncoder.encode("123"));
-                userService.insertUser(user);
+
+            if (user.getLogin() == null ) {
+                User newuser = new User();
+                newuser.setPassword(passwordEncoder.encode("123"));
+                Role role = roleService.getRoleByName("ROLE_USER");
+                newuser.setRoles(Collections.singleton(role));
+                newuser.setLogin(googleEmail);
+                userService.insertUser(newuser);
             }
         }
-
         if (map.containsKey("error")) {
             throw new InvalidTokenException(accessToken);
         }
