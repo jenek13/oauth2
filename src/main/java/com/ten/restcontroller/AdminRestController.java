@@ -37,7 +37,6 @@ public class AdminRestController {
 
     @GetMapping("/adminrest")
     public ResponseEntity<List<User>> getRestUsers() {
-        //User user = (User) userDetailsServiceImpl.loadUserByUsername(principal.getName());
         return ResponseEntity.ok(userService.listUser());
     }
 

@@ -39,7 +39,6 @@ public class AdminController {
         return "redirect:/login";
     }
 
-
     @GetMapping("/login")
     public String index(Principal principal){
         if(principal != null){
@@ -48,27 +47,10 @@ public class AdminController {
         return "login";
     }
 
-
-
-
-
-
-
-
-//    @GetMapping("/admin")
-//    public String adminPage(Model model) {
-//        return "admin";
-//    }
-
     @GetMapping("/admin")
     public String adminPage(Principal principal, Model model) {
-        //User user = (User) userDetailsServiceImpl.loadUserByUsername(principal.getName());
-       // model.addAttribute("user", user);
         return "admin";
     }
-
-
-
 
     @GetMapping(value = {"/admin/edit/{id}"})
     public ModelAndView editUser(@PathVariable("id") Long id) {

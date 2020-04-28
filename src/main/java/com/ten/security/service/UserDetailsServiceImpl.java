@@ -19,9 +19,6 @@ import javax.transaction.Transactional;
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-    @Autowired
-    private UserRepo userRepo;   //сервис, отвечающий за получение аутентификации пользователя
-
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -36,21 +33,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
-        User user = userService.getUserByLogin(login);//тут приходт налл а не логин введенный в форму, т е с формы не уходит логин
+        User user = userService.getUserByLogin(login);
         if (user == null) {
             throw new UsernameNotFoundException("Username " + login + " not found");
         }
-
         return user;
     }
-
-//    @Override
-//    public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
-//        //User userFindByGoogleUsername = userRepo.findByLogin(login);
-//        if(userFindByGoogleUsername != null) {
-//            return userFindByGoogleUsername;
-//        }
-//        return null;
-//    }
 
 }

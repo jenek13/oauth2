@@ -134,7 +134,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     //.permitAll()
                     .hasAnyAuthority("ROLE_ADMIN")
                     .and()
-                    //.oauth2Login()
                     .formLogin()//регистрируем страницу с формой логина
                     .loginPage("/login")//имя джспи страницы куда направить по дефолту при запуске
                     .loginProcessingUrl("/loginpr")//сабмитит наши креденшиалы
@@ -154,50 +153,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             e.printStackTrace();
         }
     }
-
-//    @Override
-//    protected void configure(HttpSecurity http) throws Exception
-//    {
-//        http
-//                .authorizeRequests()
-//                .antMatchers("/", "/login**").permitAll()
-//                .anyRequest().authenticated()
-//                .and().formLogin().loginPage("/login")
-//                .defaultSuccessUrl("/admin").failureUrl("/login?error").permitAll()
-//                .and().logout().logoutSuccessUrl("/").permitAll();
-//
-//        http
-//                .addFilterBefore(ssoFilter(), UsernamePasswordAuthenticationFilter.class);
-//    }
-
     @Override
     protected void configure(AuthenticationManagerBuilder auth)
     {
         auth.authenticationProvider(authProvider);
     }
-
-
-
-
-//    @Autowired
-//    private UserDetailsService userDetailsService;
-//
-//    @Bean
-//    public DaoAuthenticationProvider authProvider() {
-//        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-//        authProvider.setUserDetailsService(userDetailsService);
-//        authProvider.setPasswordEncoder(encoder());
-//        return authProvider;
-//    }
-//
-//    @Autowired
-//    public void configureGlobal(AuthenticationManagerBuilder auth) {
-//        try {
-//            auth.
-//                    userDetailsService(authenticationService).passwordEncoder(encoder());
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
 
 }
